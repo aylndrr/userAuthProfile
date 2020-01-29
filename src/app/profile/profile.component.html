@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 mt-5">
+               <img class="center" src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png" width="20%" >
+                <hr>
+                <form>
+                    <div class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                      <label for="exampleInputEmail1">Username</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Surname</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <a class="btn btn-primary right" >Edit</a>
+                  </form>
+                <!-- <mat-tab-group>
+                    <mat-tab label="First"> Content 1 </mat-tab>
+                    <mat-tab label="Second"> Content 2 </mat-tab>
+                    <mat-tab label="Third"> Content 3 </mat-tab>
+                  </mat-tab-group>                   -->
+            </div>
+        </div>
+</div>

@@ -1,7 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/']">
     {{title}}
-    <!-- <img src="https://curearthritis.org/wp-content/uploads/layerslider/Home-Slider/a.png" width="25%"> -->
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +19,11 @@
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" [routerLink]="['/login']">Login </a>
       </li>
+      <div *ngIf="service.isAuth() === true">
+        <li class="nav-item" >
+          <a class="nav-link" (click)="DestroyStorage()">LogOut </a>
+        </li>
+      </div>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -27,7 +31,5 @@
     </form>
   </div>
 </nav>
-
-
 <router-outlet>
 </router-outlet>

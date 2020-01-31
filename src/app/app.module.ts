@@ -7,8 +7,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatListModule, MatTableModule, MatTabsModule} from '@angular/material';
-import {CdkTableModule} from '@angular/cdk/table';
+import {MatTabsModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuard} from './auth/auth.guard';
+import {Service} from './service/app.service';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,9 @@ import {CdkTableModule} from '@angular/cdk/table';
     FormsModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatTableModule,
-    CdkTableModule,
-    MatListModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard, Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

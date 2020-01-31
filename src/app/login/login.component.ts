@@ -40,12 +40,9 @@ export class LoginComponent implements OnInit {
     let username, password;
     username = this.loginForm.get('username').value;
     password = this.loginForm.get('password').value;
-    // tslint:disable-next-line:prefer-for-of
-    for (let n = 0; n < this.users.length; ++n) {
-      if (username === this.users[n].Username && password === this.users[n].Password) {
-        this.router.navigate(['/']);
-      }
-    }
+    if (this.service.isLoggedIn(username, password)) {
+      this.router.navigate(['/']);
+  }
   }
 }
 

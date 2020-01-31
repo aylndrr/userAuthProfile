@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
 export class Users {
   ID: number;
@@ -46,7 +47,34 @@ const users: Users[] = [{
 
 @Injectable()
 export class Service {
+  private router: Router;
+
   getUsers(): Users[] {
     return users;
+  }
+
+  // tslint:disable-next-line:ban-types
+  isLoggedIn(username: String, password: String): boolean {
+    // tslint:disable-next-line:prefer-for-of
+    for (let n = 0; n < users.length; ++n) {
+      if (users[n].Username === username && users[n].Password === password) {
+        // tslint:disable-next-line:label-position
+        localStorage.setItem('token', Date.now().toString());
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }
+  }
+
+  isAuth(): boolean {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }

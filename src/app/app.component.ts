@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Service, Users} from './service/app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,16 @@ export class AppComponent {
   title = 'userAuthProfile';
   users = Users[0];
 
-  constructor(private service: Service) {
+  constructor(private service: Service, private router: Router) {
     this.users = service.getUsers();
     console.log(this.users);
+    // console.log(localStorage.getItem('token'));
+    // console.log(service.isAuth());
+  }
+
+  DestroyStorage() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
 

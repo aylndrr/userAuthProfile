@@ -47,7 +47,9 @@ const users: Users[] = [{
 
 @Injectable()
 export class Service {
-  private router: Router;
+
+  constructor(private router: Router) {
+  }
 
   getUsers(): Users[] {
     return users;
@@ -58,11 +60,9 @@ export class Service {
     // tslint:disable-next-line:prefer-for-of
     for (let n = 0; n < users.length; ++n) {
       if (users[n].Username === username && users[n].Password === password) {
-        // tslint:disable-next-line:label-position
         localStorage.setItem('token', Date.now().toString());
         return true;
       } else {
-        this.router.navigate(['/login']);
         return false;
       }
     }
@@ -73,8 +73,11 @@ export class Service {
     if (token) {
       return true;
     } else {
-      this.router.navigate(['/login']);
       return false;
     }
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
   }
 }

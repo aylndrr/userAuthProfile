@@ -13,17 +13,15 @@
         <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home<span
           class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <li class="nav-item" *ngIf="isAuth === true" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" [routerLink]="['/profile']"><i class="fa fa-user"></i> Profile </a>
       </li>
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <li class="nav-item" *ngIf="isAuth === false" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" [routerLink]="['/login']">Login </a>
       </li>
-      <div *ngIf="service.isAuth() === true">
-        <li class="nav-item" >
-          <a class="nav-link" (click)="DestroyStorage()">LogOut </a>
-        </li>
-      </div>
+      <li class="nav-item" *ngIf="isAuth === true">
+        <a class="nav-link" (click)="DestroyStorage()">LogOut </a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

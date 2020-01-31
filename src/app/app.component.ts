@@ -11,16 +11,18 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'userAuthProfile';
   users = Users[0];
+  isAuth: boolean = false;
 
   constructor(private service: Service, private router: Router) {
     this.users = service.getUsers();
     console.log(this.users);
+    this.isAuth = service.isAuth();
     // console.log(localStorage.getItem('token'));
     // console.log(service.isAuth());
   }
 
   DestroyStorage() {
-    localStorage.removeItem('token');
+    this.service.logOut();
     this.router.navigate(['/login']);
   }
 }

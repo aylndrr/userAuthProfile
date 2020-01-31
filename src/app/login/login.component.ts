@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Service} from '../service/app.service';
+import {Service, Users} from '../service/app.service';
+import {compareVersions} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,21 @@ import {Service} from '../service/app.service';
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  users: Users[];
 
   constructor(
+    private router: Router,
+    private service: Service,
     private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: ['']
     });
+    this.users = this.service.getUsers();
   }
 
   get f() {
@@ -30,7 +36,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    // tslint:disable-next-line:one-variable-per-declaration
+    let username, password;
+    username = this.loginForm.get('username').value;
+    password = this.loginForm.get('password').value;
+    // tslint:disable-next-line:prefer-for-of
+    for (let n = 0; n < this.users.length; ++n) {
+      if (username === this.users[n].Username && password === this.users[n].Password) {
+        this.router.navigate(['/']);
+      }
+    }
   }
 }
 

@@ -7,7 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTabsModule} from '@angular/material';
+import {MatListModule, MatTableModule, MatTabsModule} from '@angular/material';
+import {CdkTableModule} from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,10 @@ import {MatTabsModule} from '@angular/material';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    CdkTableModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

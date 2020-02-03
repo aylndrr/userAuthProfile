@@ -58,16 +58,15 @@ export class Service {
 
   // tslint:disable-next-line:ban-types
   isLoggedIn(username: String, password: String): boolean {
+    let isFound = false;
     // tslint:disable-next-line:prefer-for-of
-    for (let n = 0; n < users.length; ++n) {
-      if (users[n].Username === username && users[n].Password === password) {
-        this.localSt.store('token', Date.now().toString());
-        // localStorage.setItem('token', Date.now().toString());
-        return true;
-      } else {
-        return false;
-      }
+    const result = users.filter(x => x.Username === username && x.Password === password);
+    console.log(result);
+    if (result !== null) {
+      isFound = true;
+      this.localSt.store('token', Date.now().toString());
     }
+    return isFound;
   }
 
   isAuth(): boolean {

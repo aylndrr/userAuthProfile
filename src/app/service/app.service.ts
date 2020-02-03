@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {LocalStorage, LocalStorageService} from 'ngx-webstorage';
 
 export class Users {
   ID: number;
@@ -48,7 +49,7 @@ const users: Users[] = [{
 @Injectable()
 export class Service {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private localSt: LocalStorageService) {
   }
 
   getUsers(): Users[] {
@@ -60,7 +61,8 @@ export class Service {
     // tslint:disable-next-line:prefer-for-of
     for (let n = 0; n < users.length; ++n) {
       if (users[n].Username === username && users[n].Password === password) {
-        localStorage.setItem('token', Date.now().toString());
+        this.localSt.store('token', Date.now().toString());
+        // localStorage.setItem('token', Date.now().toString());
         return true;
       } else {
         return false;
@@ -69,7 +71,8 @@ export class Service {
   }
 
   isAuth(): boolean {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = this.localSt.retrieve('token');
     if (token) {
       return true;
     } else {
@@ -78,6 +81,7 @@ export class Service {
   }
 
   logOut() {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    this.localSt.clear('token');
   }
 }

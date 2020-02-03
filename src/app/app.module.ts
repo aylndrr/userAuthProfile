@@ -11,6 +11,7 @@ import {MatTabsModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './auth/auth.guard';
 import {Service} from './service/app.service';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {Service} from './service/app.service';
     FormsModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [AuthGuard, Service],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/']">
     {{title}}
@@ -9,17 +10,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i> Home<span
+        <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home"></i>&nbsp;Home<span
           class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" *ngIf="isAuth === true" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/profile']"><i class="fa fa-user"></i> Profile </a>
+        <a class="nav-link" [routerLink]="['/profile']"><i class="fa fa-user"></i>&nbsp;Profile </a>
       </li>
       <li class="nav-item" *ngIf="isAuth === false" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/login']">Login </a>
+        <a class="nav-link" [routerLink]="['/login']"><i class="fa fa-sign-in"></i>&nbsp;Login </a>
       </li>
-      <li class="nav-item" *ngIf="isAuth === true">
-        <a class="nav-link" (click)="DestroyStorage()">LogOut </a>
+      <li class="nav-item" *ngIf="isAuth === true" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link" [routerLink]="['/graph']"><i class="fa fa-line-chart"></i>&nbsp;Graphs </a>
+      </li>
+      <li class="nav-item" *ngIf="isAuth === true" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link" (click)="DestroyStorage()"><i class="fa fa-sign-out"></i>&nbsp;LogOut </a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

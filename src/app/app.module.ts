@@ -12,13 +12,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './auth/auth.guard';
 import {Service} from './service/app.service';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import { GraphComponent } from './graph/graph.component';
+import {ExchangeService} from './service/exchange.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     HttpClientModule,
     NgxWebstorageModule.forRoot()
   ],
-  providers: [AuthGuard, Service],
+  providers: [AuthGuard, Service, ExchangeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

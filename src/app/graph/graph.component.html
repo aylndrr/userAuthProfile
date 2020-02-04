@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+      <h4>Enter the date range</h4>
+      <hr>
+      <form class="form-inline" [formGroup]="exchangeForm" (ngSubmit)="showExchange()">
+        <div class="form-group mb-2">
+          <label  class="sr-only">Date</label>
+          <input type="date" class="form-control" formControlName="selectedDate" >
+        </div>
+        &nbsp;
+        <button type="button" class="btn btn-primary mb-2" (click)="showExchange()">Show it!</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+
+    </div>
+  </div>
+</div>

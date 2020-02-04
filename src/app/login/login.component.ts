@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Service, Users} from '../service/app.service';
-import {compareVersions} from '@angular/compiler-cli/src/diagnostics/typescript_version';
+import {Service} from '../service/app.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,6 @@ import {compareVersions} from '@angular/compiler-cli/src/diagnostics/typescript_
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  users: Users[];
 
   constructor(
     private router: Router,
@@ -28,7 +26,7 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: ['']
     });
-    this.users = this.service.getUsers();
+
   }
 
   get f() {
@@ -36,11 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // tslint:disable-next-line:one-variable-per-declaration
-    let username, password;
-    username = this.loginForm.get('username').value;
-    password = this.loginForm.get('password').value;
-    if (this.service.isLoggedIn(username, password)) {
+    if (this.service.login(this.f.username.value, this.f.password.value, this.f.rememberMe.value)) {
       this.router.navigate(['/']);
     }
   }

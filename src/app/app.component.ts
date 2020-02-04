@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private service: Service, private router: Router) {
     this.users = service.getUsers();
     console.log(this.users);
-    this.isAuth = service.isAuth();
+    this.isAuth = service.isLogin();
     // console.log(localStorage.getItem('token'));
     // console.log(service.isAuth());
   }

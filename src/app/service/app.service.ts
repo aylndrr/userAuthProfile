@@ -60,9 +60,11 @@ export class Service {
   isLoggedIn(username: String, password: String): boolean {
     let isFound = false;
     // tslint:disable-next-line:prefer-for-of
-    const result = users.filter(x => x.Username === username && x.Password === password);
+    console.log(username);
+    console.log(password);
+    const result = users.filter(x => x.Username === username && x.Password === password).push();
     console.log(result);
-    if (result !== null) {
+    if (result !== 0) {
       isFound = true;
       this.localSt.store('token', Date.now().toString());
     }

@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
     let username, password;
     username = this.loginForm.get('username').value;
     password = this.loginForm.get('password').value;
-    console.log(this.service.isLoggedIn(username, password));
     if (this.service.isLoggedIn(username, password)) {
       this.router.navigate(['/']);
     }

@@ -6,9 +6,7 @@ import {User, USERS} from '../models/user.model';
 
 @Injectable()
 export class Service {
-
   users: User[];
-
   constructor(private router: Router, private localStorageService: LocalStorageService) {
     this.users = USERS;
   }

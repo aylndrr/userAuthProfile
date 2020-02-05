@@ -14,13 +14,9 @@ export class ExchangeService {
     const yyyy = currentDate.split('-')[0];
     const MM = currentDate.split('-')[1];
     const dd = currentDate.split('-')[2];
-    // console.log(this.http.get(
-    //   // tslint:disable-next-line:max-line-length
-    //   'http://www.tcmb.gov.tr/kurlar/' + yyyy + MM + '/' + dd + MM + yyyy + '.xml'
-    // ));
     return this.http.get(
-      // tslint:disable-next-line:max-line-length
-      'http://www.tcmb.gov.tr/kurlar/' + yyyy + MM + '/' + dd + MM + yyyy + '.xml'
+      'kurlar/' + yyyy + MM + '/' + dd + MM + yyyy + '.xml',
+      {responseType: 'text'}
     );
   }
 }

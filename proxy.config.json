@@ -1,6 +1,11 @@
 {
-  "/kurlar": {
-    "target": "http://localhost:4200",
-    "secure": false
+  "/kurlar/*": {
+    "target": "https://www.tcmb.gov.tr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/kurlar": "https://www.tcmb.gov.tr/kurlar"
+    }
   }
 }

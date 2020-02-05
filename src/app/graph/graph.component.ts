@@ -11,8 +11,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class GraphComponent implements OnInit {
   exchangeForm: FormGroup;
-  data: boolean = true;
   exchangeResult: any;
+  responseStatus: number;
 
   constructor(private formBuilder: FormBuilder, private exchangeService: ExchangeService, private http: HttpClient) {
   }
@@ -28,14 +28,7 @@ export class GraphComponent implements OnInit {
   }
 
   showExchange(): void {
-    console.log(this.exchangeForm.value);
-    this.exchangeService.getExchange(this.f.startDate.value).subscribe(x => {
-      this.exchangeService.parseXML(x)
-        .then((data) => {
-          this.exchangeService.xmlItems = data;
-        });
-      this.exchangeResult = x;
-      console.log('sonuc :', this.exchangeResult);
-    });
+    this.exchangeResult = this.exchangeService.loadXML(this.f.startDate.value);
+    console.log(this.exchangeResult);
   }
 }

@@ -5,6 +5,7 @@ import {DatePipe} from '@angular/common';
 import {NgxXml2jsonService} from 'ngx-xml2json';
 import {map} from 'rxjs/operators';
 import {Welcome} from '../models/currency.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,26 +31,18 @@ export class ExchangeService {
     return `/kurlar/${yearMonth}/${dateStr}.xml`;
   }
 
-  loadXML(date: string): Welcome {
+  loadXML(date: string): Observable<Welcome> {
     const url = this.buildUrl(date);
     const headers = new HttpHeaders({'Content-Type': 'text/xml'}).set('Accept', 'text/xml');
-    this.http.get(url,
+    return this.http.get(url,
       {headers, responseType: 'text'})
       .pipe(
         map(result => {
           const xml = this.parser.parseFromString(result, 'text/xml');
           const obj = this.xml2JsonService.xmlToJson(xml);
-          console.log(JSON.stringify(obj));
           const data: Welcome = JSON.parse(JSON.stringify(obj));
           return data;
         })
-      ).subscribe(result => {
-      console.log(this.exchange);
-      this.exchange = JSON.parse(JSON.stringify(result));
-      this.exchange.Tarih_Date.Currency = this.exchange.Tarih_Date.Currency.filter(f => f['@attributes'].Kod !== 'XDR');
-      // console.log(JSON.stringify(result));
-      // console.log(this.exchange.Tarih_Date.Currency);
-    });
-    return this.exchange;
+      );
   }
 }

@@ -41,6 +41,7 @@ export class ExchangeService {
           const xml = this.parser.parseFromString(result, 'text/xml');
           const obj = this.xml2JsonService.xmlToJson(xml);
           const data: Welcome = JSON.parse(JSON.stringify(obj));
+          // console.log(data);
           return data;
         })
       );

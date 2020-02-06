@@ -12,7 +12,7 @@ import {Currency} from '../models/currency.model';
 })
 export class GraphComponent implements OnInit {
   exchangeForm: FormGroup;
-  exchangeResult: any;
+  exchangeResult: Currency[];
 
   constructor(private formBuilder: FormBuilder, private exchangeService: ExchangeService, private http: HttpClient) {
   }
@@ -30,7 +30,7 @@ export class GraphComponent implements OnInit {
   showExchange(): void {
     this.exchangeService.loadXML(this.f.startDate.value).subscribe(result => {
       this.exchangeResult = JSON.parse(JSON.stringify(result));
-      this.exchangeResult.Tarih_Date.Currency = result.Tarih_Date.Currency.filter(f => f['@attributes'].Kod !== 'XDR');
+      this.exchangeResult = result.Tarih_Date.Currency.filter(f => f['@attributes'].Kod !== 'XDR');
     }, error => {
       this.exchangeResult = [];
     });

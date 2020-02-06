@@ -14,29 +14,29 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <div *ngIf="!this.exchangeResult" class="alert alert-warning" role="alert">
+      <div *ngIf="!exchangeResult" class="alert alert-warning" role="alert">
         <i class="fa  fa-info"></i> Kur bilgisi bulunamadı.
       </div>
-      <div *ngIf="this.exchangeResult">
-        <dx-data-grid
-          id="gridContainer"
-          [showRowLines]="true"
-          [rowAlternationEnabled]="true"
-          [dataSource]="this.exchangeResult.Tarih_Date.Currency"
-          [showBorders]="true">
-          <dxo-search-panel
-            [visible]="true"
-            [highlightCaseSensitive]="true"
-          ></dxo-search-panel>
-          <dxi-column dataField="@attributes.Kod" caption="Döviz" alignment="left" cellTemplate="cellTemplate"></dxi-column>
-          <dxi-column dataField="ForexBuying" caption="Alış" dataType="number" alignment="right"></dxi-column>
-          <dxi-column dataField="ForexSelling" caption="Satış" dataType="number" alignment="right"></dxi-column>
+      <div *ngIf="exchangeResult">
+          <dx-data-grid
+            id="gridContainer"
+            [showRowLines]="true"
+            [rowAlternationEnabled]="true"
+            [dataSource]="this.exchangeResult"
+            [showBorders]="true">
+            <dxo-search-panel
+              [visible]="true"
+              [highlightCaseSensitive]="true"
+            ></dxo-search-panel>
+            <dxi-column dataField="@attributes.Kod" caption="Döviz" alignment="left" cellTemplate="cellTemplate"></dxi-column>
+            <dxi-column dataField="ForexBuying" caption="Alış" dataType="number" alignment="right"></dxi-column>
+            <dxi-column dataField="ForexSelling" caption="Satış" dataType="number" alignment="right"></dxi-column>
 
-          <div *dxTemplate="let data of 'cellTemplate'">
-            <div class="currency-flag currency-flag-{{data.value.toLowerCase()}}"></div>
-            {{data.value}}
-          </div>
-        </dx-data-grid>
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div class="currency-flag currency-flag-{{data.value.toLowerCase()}}"></div>
+              {{data.value}}
+            </div>
+          </dx-data-grid>
       </div>
     </div>
   </div>

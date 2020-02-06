@@ -23,3 +23,4 @@ export interface Currency {
   CrossRateUSD?: string;
   CrossRateOther?: string;
 }
+

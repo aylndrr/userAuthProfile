@@ -20,8 +20,6 @@ export class ExchangeService {
   }
 
   private getDateStringWithFormat(date: Date, format: string): string {
-    console.log('date : ', date);
-    console.log('format : ', format);
     return this.datePipe.transform(date, format);
   }
 
@@ -41,50 +39,17 @@ export class ExchangeService {
         map(result => {
           const xml = this.parser.parseFromString(result, 'text/xml');
           const obj = this.xml2JsonService.xmlToJson(xml);
+          console.log(JSON.stringify(obj));
           const data: Welcome = JSON.parse(JSON.stringify(obj));
           return data;
         })
       ).subscribe(result => {
+      console.log(this.exchange);
       this.exchange = JSON.parse(JSON.stringify(result));
-      this.exchange.Tarih_Date.Currency = this.exchange.Tarih_Date.Currency.filter(f => f['@attributes'].Kod !== 'XDR')
+      this.exchange.Tarih_Date.Currency = this.exchange.Tarih_Date.Currency.filter(f => f['@attributes'].Kod !== 'XDR');
       // console.log(JSON.stringify(result));
-      console.log(this.exchange.Tarih_Date.Currency);
+      // console.log(this.exchange.Tarih_Date.Currency);
     });
     return this.exchange;
-  }
-
-  parseXML(data) {
-    return new Promise(resolve => {
-      // tslint:disable-next-line:one-variable-per-declaration
-      let k: string | number,
-        // tslint:disable-next-line:prefer-const
-        arr = [],
-        // tslint:disable-next-line:prefer-const
-        parser = new xml2js.Parser(
-          {
-            trim: true,
-            explicitArray: true
-          });
-      // tslint:disable-next-line:only-arrow-functions
-      parser.parseString(data, function(err, result) {
-        const obj = result.Tarih_Date;
-        // tslint:disable-next-line:forin
-        for (k in obj.Currency) {
-          const item = obj.Currency[k];
-          arr.push({
-            Unit: item.Unit[0],
-            Isim: item.Isim[0],
-            CurrencyName: item.CurrencyName[0],
-            ForexBuying: item.ForexBuying[0],
-            ForexSelling: item.ForexSelling[0],
-            BanknoteBuying: item.BanknoteBuying[0],
-            BanknoteSelling: item.BanknoteSelling[0],
-            CrossRateUSD: item.CrossRateUSD[0],
-            CrossRateOther: item.CrossRateOther[0]
-          });
-        }
-        resolve(arr);
-      });
-    });
   }
 }

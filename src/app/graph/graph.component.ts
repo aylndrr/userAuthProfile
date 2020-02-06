@@ -29,6 +29,6 @@ export class GraphComponent implements OnInit {
 
   showExchange(): void {
     this.exchangeResult = this.exchangeService.loadXML(this.f.startDate.value);
-    console.log(this.exchangeResult);
+    // console.log(this.exchangeResult);
   }
 }
